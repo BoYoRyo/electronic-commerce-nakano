@@ -54,7 +54,7 @@ public class UserRepository {
 	 * @param password password
 	 * @return userオブジェクト
 	 */
-	public User findByEmailAndPassword(Integer email, Integer password) {
+	public User findByEmailAndPassword(String email, String password) {
 		String sql = "SELECT id, name, email, password, zipcode, address, telephone FROM users WHERE email = :email AND password = :password";
 		SqlParameterSource param = new MapSqlParameterSource().addValue("email", email).addValue("password", password);
 		List<User> userList = template.query(sql, param, USER_ROW_MAPPER);
