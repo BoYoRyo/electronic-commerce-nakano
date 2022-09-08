@@ -10,12 +10,24 @@ import com.example.domain.User;
 import com.example.form.UserRegistrationForm;
 import com.example.service.UserRegistrationService;
 
+/**
+ * ユーザー登録を行うコントローラークラス.
+ * 
+ * @author nakanoryo
+ *
+ */
 @Controller
 @RequestMapping()
 public class UserRegistrationController {
 	@Autowired
 	private UserRegistrationService userRegistrationService;
-	
+
+	/**
+	 * ユーザー登録をしてログイン画面へ遷移する.
+	 * 
+	 * @param form ユーザー情報のフォーム
+	 * @return ログイン画面へリダイレクト
+	 */
 	@PostMapping("/Regist")
 	public String userRegister(UserRegistrationForm form) {
 		User user = new User();
@@ -25,5 +37,5 @@ public class UserRegistrationController {
 		userRegistrationService.userRegistration(user);
 		return "redirect:/toLogin";
 	}
-	
+
 }
