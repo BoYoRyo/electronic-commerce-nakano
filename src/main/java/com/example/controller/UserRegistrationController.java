@@ -33,8 +33,9 @@ public class UserRegistrationController {
 	 * @return ログイン画面へリダイレクト
 	 */
 	@PostMapping("/regist-user")
-	public String userRegister(@Validated UserRegistrationForm form, BindingResult result, RedirectAttributes redirectAttributes) {
-		if(result.hasErrors()) {
+	public String userRegister(@Validated UserRegistrationForm form, BindingResult result,
+			RedirectAttributes redirectAttributes) {
+		if (result.hasErrors()) {
 			return toRegist(form);
 		}
 		User user = new User();
@@ -43,16 +44,6 @@ public class UserRegistrationController {
 		user.setName(name);
 		userRegistrationService.userRegistration(user);
 		return "redirect:/toLogin";
-	}
-
-	/**
-	 * ログイン画面に遷移.
-	 * 
-	 * @return ログイン画面
-	 */
-	@GetMapping("/toLogin")
-	public String toLogin() {
-		return "login";
 	}
 
 	/**
