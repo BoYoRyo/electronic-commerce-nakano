@@ -33,6 +33,9 @@ public class UserRegistrationForm {
 	@Size(min = 8, max = 12, message = "8～12字で入力してください")
 	private String password;
 
+	/** 確認用パスワード */
+	private String confirmationPassword;
+
 	/** 郵便番号 */
 	@NotBlank(message = "郵便番号を入力してください")
 	@Pattern(regexp = "^[0-9]{3}-[0-9]{4}$", message = "郵便番号はXXX-XXXXの形式で入力してください")
@@ -50,8 +53,8 @@ public class UserRegistrationForm {
 	@Override
 	public String toString() {
 		return "UserRegistrationForm [familyName=" + familyName + ", firstName=" + firstName + ", email=" + email
-				+ ", password=" + password + ", zipcode=" + zipcode + ", address=" + address + ", telephone="
-				+ telephone + "]";
+				+ ", password=" + password + ", confirmationPassword=" + confirmationPassword + ", zipcode=" + zipcode
+				+ ", address=" + address + ", telephone=" + telephone + "]";
 	}
 
 	public String getFamilyName() {
@@ -84,6 +87,14 @@ public class UserRegistrationForm {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getConfirmationPassword() {
+		return confirmationPassword;
+	}
+
+	public void setConfirmationPassword(String confirmationPassword) {
+		this.confirmationPassword = confirmationPassword;
 	}
 
 	public String getZipcode() {
