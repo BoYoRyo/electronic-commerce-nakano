@@ -11,7 +11,7 @@ import com.example.repository.UserRepository;
  * @author nakanoryo
  *
  */
-public class UserService {
+public class UserRegistrationService {
 	@Autowired
 	private UserRepository userRepository;
 	
