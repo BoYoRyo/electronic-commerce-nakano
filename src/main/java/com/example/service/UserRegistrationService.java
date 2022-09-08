@@ -27,4 +27,18 @@ public class UserRegistrationService {
 	public void userRegistration(User user) {
 		userRepository.insertUser(user);
 	}
+	
+	/**
+	 * メールアドレスが重複していないかチェック
+	 * 
+	 * @param email emailアドレス
+	 * @return 重複していたらfalse/していなければtrue
+	 */
+	public Boolean isCheckEmail(String email) {
+		if(userRepository.findByEmail(email) == null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

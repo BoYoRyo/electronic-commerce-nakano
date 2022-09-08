@@ -35,6 +35,10 @@ public class UserRegistrationController {
 	@PostMapping("/regist-user")
 	public String userRegister(@Validated UserRegistrationForm form, BindingResult result,
 			RedirectAttributes redirectAttributes) {
+		// メールアドレスの重複チェック
+		if (userRegistrationService.isCheckEmail(form.getEmail()) == false) {
+			result.rejectValue("email", null, "そのメールアドレスはすでに使われています");
+		}
 		if (result.hasErrors()) {
 			return toRegist(form);
 		}

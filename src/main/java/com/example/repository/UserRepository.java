@@ -66,19 +66,19 @@ public class UserRepository {
 	}
 	
 	/**
-	 * メールアドレスが存在するか検索する.
+	 * メールアドレスで検索する.
 	 * 
 	 * @param email　email
-	 * @return 存在していたらture/いなかったらfalse
+	 * @return userオブジェクト
 	 */
-	public Boolean findByEmail(String email) {
+	public User findByEmail(String email) {
 		String sql = "SELECT id, name, email, password, zipcode, address, telephone FROM users WHERE email = :email";
 		SqlParameterSource param = new MapSqlParameterSource().addValue("email", email);
 		List<User> userList = template.query(sql, param, USER_ROW_MAPPER);
 		if(userList.size() == 0) {
-			return false;
-		} else {
-			return true;
-		}
+			return null;
+		} 
+		User user = userList.get(0);
+		return user;
 	}
 }
