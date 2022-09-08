@@ -39,6 +39,9 @@ public class UserRegistrationController {
 		if (userRegistrationService.isCheckEmail(form.getEmail()) == false) {
 			result.rejectValue("email", null, "そのメールアドレスはすでに使われています");
 		}
+		if(form.getPassword() != form.getConfirmationPassword()) {
+			result.rejectValue("confirmationPassword", null, "パスワードと確認用パスワードが不一致です");
+		}
 		if (result.hasErrors()) {
 			return toRegist(form);
 		}
