@@ -54,8 +54,8 @@
     </header>
     <div class="top-wrapper">
       <div class="container">
-      <form th:action="@{/regist-user}" method="post" th:object="${userRegistrationForm}">
         <div class="row register-page">
+      <form th:action="@{/regist-user}" method="post" th:object="${userRegistrationForm}">
           <div class="error" th:errors="*{familyName}"></div>
           <div class="error" th:errors="*{firstName}"></div>
           <div class="row">
@@ -136,8 +136,13 @@
               <span>登録<i class="material-icons right">done</i></span>
             </button>
           </div>
-        </div>
         </form>
+        <form th:action="@{/toLogin}" method="get" class="row register-admin-btn">
+          <button class="btn" type="submit">
+            <span>戻る<i class="material-icons right">clear</i></span>
+          </button>
+        </form>
+        </div>
       </div>
       <!-- end container-->
     </div>
