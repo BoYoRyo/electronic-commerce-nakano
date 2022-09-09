@@ -37,10 +37,15 @@ public class ShowItemDetailCotroller {
 	 */
 	@GetMapping("/item-detail")
 	public String showItemDetail(Integer id, Model model) {
+		
+		//リンクの商品を検索
 		Item item = showItemDetailService.showItemDetail(id);
 		model.addAttribute("item", item);
+		
+		//Toppingリストの取得
 		List<Topping> toppingList = showToppingListService.ShowAllTopping();
 		model.addAttribute("toppingList", toppingList);
+		
 		return "item_detail";
 	}
 }
