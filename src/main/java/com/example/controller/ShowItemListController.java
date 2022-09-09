@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.domain.Item;
 import com.example.service.ShowItemListService;
+import com.example.service.ShowSearchItemListService;
 
 /**
  * 商品一覧画面を表示する.
@@ -23,6 +24,9 @@ public class ShowItemListController {
 	@Autowired
 	private ShowItemListService showItemListService;
 
+	@Autowired
+	private ShowSearchItemListService showSearchItemListService;
+
 	/**
 	 * 商品一覧画面を表示する.
 	 * 
@@ -32,6 +36,17 @@ public class ShowItemListController {
 	@GetMapping("")
 	public String showItemList(Model model) {
 		List<Item> itemList = showItemListService.showItemList();
+		model.addAttribute("itemList", itemList);
+		return "item_list";
+	}
+	
+	@GetMapping("/search")
+	public String searchItem(String searchName, Model model) {
+		List<Item> itemList = showSearchItemListService.ShowSearchItemList(searchName);
+		if(itemList.size() == 0 || searchName == "") {
+			model.addAttribute("searchErrorMessage", "「" + searchName + "」に該当する商品がありませんでした。");
+			return showItemList(model);
+		}
 		model.addAttribute("itemList", itemList);
 		return "item_list";
 	}

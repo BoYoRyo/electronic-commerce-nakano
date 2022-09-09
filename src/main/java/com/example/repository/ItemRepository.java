@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import com.example.domain.Item;
@@ -41,6 +43,19 @@ public class ItemRepository {
 	public List<Item> findAllOrderByPriceASC() {
 		String sql = "SELECT id, name, description, price_m, price_l, image_path, deleted FROM items ORDER BY price_m";
 		List<Item> itemList = template.query(sql, ITEM_ROW_MAPPER);
+		return itemList;
+	}
+
+	/**
+	 * 文字列検索して価格の昇順で検索する.
+	 * 
+	 * @param searchName 検索文字列
+	 * @return Itemリスト
+	 */
+	public List<Item> findByLikeNameOrderByPriceASC(String searchName) {
+		String sql = "SELECT id, name, description, price_m, price_l, image_path, deleted FROM items WHERE name ILIKE :searchName ORDER BY price_m";
+		SqlParameterSource param = new MapSqlParameterSource().addValue("searchName", "%" + searchName + "%");
+		List<Item> itemList = template.query(sql, param, ITEM_ROW_MAPPER);
 		return itemList;
 	}
 }

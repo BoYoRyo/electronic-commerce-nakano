@@ -37,7 +37,7 @@
       <div class="container">
         <div class="header">
           <div class="header-left">
-            <a href="top.html">
+            <a th:href="@{/}">
               <img class="logo" src="img/header_logo.png" />
             </a>
           </div>
@@ -60,10 +60,10 @@
     <!-- search form -->
     <div class="search-wrapper">
       <div class="container">
-        <form method="post" class="search-form">
-          <input type="text" name="name" class="search-name-input" />
+        <form method="get" class="search-form" th:action="@{/search}">
+          <input type="text" name="searchName" class="search-name-input" />
 
-          <button class="btn search-btn" type="button">
+          <button class="btn search-btn" type="submit">
             <span>検　索</span>
           </button>
         </form>
@@ -73,6 +73,7 @@
     <!-- item list -->
     <div class="item-wrapper">
       <div class="container">
+        <div class="items" th:text="${searchErrorMessage}" style="color:red"></div>
         <div class="items">
         
           <div class="item" th:each="item:${itemList}">
