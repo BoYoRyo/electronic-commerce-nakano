@@ -61,8 +61,10 @@
     <div class="search-wrapper">
       <div class="container">
         <form method="get" class="search-form" th:action="@{/search}">
-          <input type="text" name="searchName" class="search-name-input" />
-
+          <input type="text" name="searchName" class="search-name-input" placeholder="商品名検索" list="itemList" autocomplete="on"/>
+          <datalist id="itemList">
+            <option th:each="item:${itemList}" th:value="${item.name}">
+          </datalist>
           <button class="btn search-btn" type="submit">
             <span>検　索</span>
           </button>
