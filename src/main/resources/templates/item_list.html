@@ -61,8 +61,10 @@
     <div class="search-wrapper">
       <div class="container">
         <form method="get" class="search-form" th:action="@{/search}">
-          <input type="text" name="searchName" class="search-name-input" />
-
+          <input type="text" name="searchName" class="search-name-input" placeholder="商品名検索" list="itemList" autocomplete="on"/>
+          <datalist id="itemList">
+            <option th:each="item:${itemList}" th:value="${item.name}">
+          </datalist>
           <button class="btn search-btn" type="submit">
             <span>検　索</span>
           </button>
@@ -78,11 +80,13 @@
         
           <div class="item" th:each="item:${itemList}">
             <div class="item-icon">
-              <img th:src="@{img/} + ${item.imagePath}" />
+              <a th:href="@{/item-detail?id=}+${item.id}">
+                <img th:src="@{img/} + ${item.imagePath}" th:href="@{/item-detail?id=}+${item.id}"/>
+              </a>
             </div>
-            <a href="item_detail.html" th:text="${item.name}">ハワイアンパラダイス</a><br />
-            <span class="price">Ｍ</span><span th:text="${#numbers.formatInteger(item.priceM,2,'COMMA')}">1,380円(税抜)</span>円(税抜)<br />
-            <span class="price">Ｌ</span><span th:text="${#numbers.formatInteger(item.priceL,2,'COMMA')}">1,380円(税抜)</span>円(税抜)<br />
+            <a th:href="@{/item-detail?id=}+${item.id}"><span th:text="${item.name}"></span></a><br />
+            <span class="price">Ｍ</span><span th:text="${#numbers.formatInteger(item.priceM,2,'COMMA')}"></span>円(税抜)<br />
+            <span class="price">Ｌ</span><span th:text="${#numbers.formatInteger(item.priceL,2,'COMMA')}"></span>円(税抜)<br />
           </div>
           
         </div>

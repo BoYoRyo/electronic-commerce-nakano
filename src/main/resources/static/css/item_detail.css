@@ -17,6 +17,23 @@
   height: 250px;
   padding: 0 0 15px 0;
 }
+/*  */
+.item-image img{
+  margin: auto;
+  display: block;
+  border-radius: 30px;
+  width: 250px;
+  height: 250px;
+  padding: 0 0 15px 0;
+  background-color: white;
+  transform-origin: top left;/*  */
+  transition: transform .3s;/*  */
+}
+
+.item-image img:hover {
+  transform: scale(2, 2);
+}
+/*  */
 
 .item-intro {
   width: 400px;
